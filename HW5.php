@@ -57,7 +57,7 @@ if (isset($_POST['send'])) {
 
 
 
-
+$pass=md5($password)
     if(count($errors) > 0) {
         echo "<ul class='text-danger'>";
         foreach($errors as $error){
@@ -69,7 +69,7 @@ if (isset($_POST['send'])) {
    
         $stmt = $conn->prepare("INSERT INTO profile (Name, Password,gender, Email,Image)
         VALUES (?, ?, ?, ?,'$img_name' )");
-        $stmt->bind_param("ssis", $name, $password,$gender, $email);
+        $stmt->bind_param("ssis", $name, $pass,$gender, $email);
        
         $stmt->execute();
         $stmt->close();

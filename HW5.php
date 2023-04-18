@@ -40,11 +40,11 @@ if (isset($_POST['send'])) {
     if ($_POST['name'] == '') {
         $errors[] = 'name Can NOT be empty';
     }
-    if($_POST['image'] !=null){
-        $errors[] = 'image Can NOT be empty';
-    }elseif($_FILES['image']['size'] > 1024*1024) {
-        $errors[] = 'Image size must be less than 1 MB';
-    }
+    // if($_POST['image'] !=null){
+    //     $errors[] = 'image Can NOT be empty';
+    // }elseif($_FILES['image']['size'] > 1024*1024) {
+    //     $errors[] = 'Image size must be less than 1 MB';
+    // }
     else {
         $ext =  pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $img_name = date('Y-m-dH-i-s') . md5($_FILES['image']['name']) .'.' . $ext;
@@ -57,7 +57,7 @@ if (isset($_POST['send'])) {
 
 
 
-$pass=md5($password)
+// $pass=md5($password)
     if(count($errors) > 0) {
         echo "<ul class='text-danger'>";
         foreach($errors as $error){
@@ -69,7 +69,7 @@ $pass=md5($password)
    
         $stmt = $conn->prepare("INSERT INTO profile (Name, Password,gender, Email,Image)
         VALUES (?, ?, ?, ?,'$img_name' )");
-        $stmt->bind_param("ssis", $name, $pass,$gender, $email);
+        $stmt->bind_param("ssis", $name, $password,$gender, $email);
        
         $stmt->execute();
         $stmt->close();
